@@ -3,8 +3,7 @@ import Icon from "./Icon.svelte";
 import { onDestroy, onMount } from "svelte";
 import type { MusicPlayerState } from "@/stores/musicPlayerStore";
 import { musicPlayerStore } from "@/stores/musicPlayerStore";
-import type { PlayerMode, Song } from "@/components/widgets/music-player/types";
-import ModeToggle from "@/components/widgets/music-player/molecules/ModeToggle.svelte";
+import type { Song } from "@/components/widgets/music-player/types";
 
 interface Track {
 	name: string;
@@ -167,20 +166,16 @@ function onSwitchKeydown(e: KeyboardEvent) {
 	}
 }
 
-async function handleResetPlaylist() {
+async function handleSwitchToLocal() {
 	isSwitching = true;
 	try {
-		await musicPlayerStore.resetCloudPlaylist();
+		await musicPlayerStore.setMode("local");
 		closeSwitchDialog();
 	} catch (e) {
-		console.warn("[VisualizerControls] resetCloudPlaylist failed:", e);
+		console.warn("[VisualizerControls] setMode local failed:", e);
 	} finally {
 		isSwitching = false;
 	}
-}
-
-function handleModeChange(mode: PlayerMode) {
-	musicPlayerStore.setMode(mode);
 }
 
 onMount(() => {
@@ -432,12 +427,6 @@ onDestroy(() => {
 					<Icon icon="material-symbols:close-rounded" size="lg" />
 				</button>
 			</div>
-			<div class="music-switch-mode-bar">
-				<ModeToggle
-					mode={playerState.mode}
-					onChange={handleModeChange}
-				/>
-			</div>
 			<div class="music-switch-body">
 				<label class="music-switch-label" for="playlist-id-input">
 					输入歌单ID
@@ -460,10 +449,10 @@ onDestroy(() => {
 				</button>
 				<button
 					class="music-switch-reset"
-					onclick={handleResetPlaylist}
+					onclick={handleSwitchToLocal}
 					disabled={isSwitching}
 				>
-					重置为默认歌单
+					切换为本地
 				</button>
 			</div>
 		</div>
