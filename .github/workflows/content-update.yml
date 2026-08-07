@@ -28,5 +28,5 @@ jobs:
           ENABLE_CONTENT_SYNC: true
           CONTENT_REPO_URL: https://github.com/yujing0208/yujingblog-content.git
       - name: Deploy to Vercel
-        run: curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_BItOPjeta2kvX8ygeHX2WwujQaRQ/TTgWQJsUlL?branch=master
+        run: curl -f -X POST https://api.vercel.com/v1/integrations/deploy/prj_s44cNpfUAFZSbBgQ6lbrIUrjL2iX/C0tPxPcijZ?branch=master
 
