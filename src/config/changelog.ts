@@ -2,6 +2,12 @@ import type { ChangelogItem } from "../types/changelog";
 
 export const changelogData: ChangelogItem[] = [
 	{
+		hash: "a64f601",
+		date: "2026-08-07 17:55:33",
+		message: "Add files via upload",
+		type: "other",
+	},
+	{
 		hash: "330b03a",
 		date: "2026-08-07 16:10:12",
 		message: "fix(music): 修复续播失效——初始化先捕获快照再加载歌单，避免被 loadSong 覆盖成第一首",
